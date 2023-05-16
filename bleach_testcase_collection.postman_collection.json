@@ -1,0 +1,2006 @@
+{
+	"info": {
+		"_postman_id": "0c534184-e532-4c50-a0af-adb05386bd4b",
+		"name": "bleach_testcase_collection",
+		"description": "這裏是blech_testcase的接口測試用例的集合",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bleach_testcase001",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應等於預期值\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body({\"code\": 200, \"id\": \"1\", \"name\": \"\\u5c0f\\u660e\", \"age\": 18});\r",
+							"});\r",
+							"//判斷響應體code=200\r",
+							"pm.test(\"test Response code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/getuser?userid=1",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				},
+				"description": "GET請求——獲取用戶信息成功"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase002",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應msg\r",
+							"pm.test(\"test Response code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/getuser?userid=2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "2"
+						}
+					]
+				},
+				"description": "GET請求——獲取不存在的用戶信息，期待響應返回提示“沒有這個用戶“"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase003",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應msg\r",
+							"pm.test(\"test Response code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/getuser",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					]
+				},
+				"description": "GET請求——不傳遞參數，接口響應提示”沒有這個用戶“"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase004",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應msg\r",
+							"pm.test(\"test Response code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/getuser?userid=-1",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "-1"
+						}
+					]
+				},
+				"description": "GET請求——userid非法傳遞參數，期待返回”沒有這個用戶“"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase005",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應msg\r",
+							"pm.test(\"test Response code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/getuser?userid=admin",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "admin"
+						}
+					]
+				},
+				"description": "GET請求——userid非法參數，返回”沒有這個用戶“"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase006",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body({\"code\": 200, \"id\": 1, \"name\": \"\\u5c0f\\u660e\", \"age\": 18});\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/getuser",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					]
+				},
+				"description": "POST請求——接口文檔聲稱該接口支持GET和POST方法"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase007",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的msg\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/getuser",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					]
+				},
+				"description": "POST請求——所傳遞參數useridwei為不存在的ID"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase008",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的msg\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{domain}}/getuser",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					]
+				},
+				"description": "POST請求——不傳遞參數"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase009",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的msg\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "-1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/getuser",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					]
+				},
+				"description": "POST請求——userid=-1,非法傳遞參數"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase010",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的msg\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"<html><title>500: Internal Server Error</title><body>500: Internal Server Error</body></html>\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/getuser",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					]
+				},
+				"description": "POST請求——userid=admin,為非法參數"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach_testcase011",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的msg和code\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/getuser",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser"
+					]
+				},
+				"description": "POST請求——正常傳遞參數"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase012",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=200\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    //pm.expect(jsonData.value).to.eql({\"code\": 200, \"id\": 1, \"name\": \"\\u5c0f\\u660e\", \"age\": 18});\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"});\r",
+							"//判斷響應體的body\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body({\"code\": 200, \"id\": 1, \"name\": \"\\u5c0f\\u660e\", \"age\": 18});\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{domain}}/getuser2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser2"
+					]
+				},
+				"description": "GET請求——請求頭的content-type設置為application/json"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase013",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=500\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"请设置Content-Type为application/json\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{domain}}/getuser2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser2"
+					]
+				},
+				"description": "GET請求——請求頭的content-type為設置為application/json"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase014",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=500\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"请设置Content-Type为application/json\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{domain}}/getuser2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser2"
+					]
+				},
+				"description": "GET請求———請求頭的content-type錯誤設置為application/json123"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=500\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{domain}}/getuser2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser2"
+					]
+				},
+				"description": "GET请求——不传参，请求头的content-type设置为appication/json"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase016",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=500\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{domain}}/getuser2?userid=2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getuser2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "2"
+						}
+					]
+				},
+				"description": "GET请求——非法传参userid=2，请求头的content-type设置为application/json"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase017",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=200\r",
+							"pm.test(\"test response body msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    //pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"});\r",
+							"//判断响应体的body\r",
+							"pm.test(\"test response body\", function () {\r",
+							"    pm.response.to.have.body({\"code\": 200, \"userid\": 1, \"money\": 1000});\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userid\":1}"
+				},
+				"url": {
+					"raw": "http://{{domain}}/getmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getmoney"
+					]
+				},
+				"description": "POST请求——合法传参userid=1"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase018",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=500\r",
+							"pm.test(\"test response code msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"参数错误\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/getmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getmoney"
+					]
+				},
+				"description": "POST请求——form-data非法传参"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase019",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userid\":2}"
+				},
+				"url": {
+					"raw": "http://{{domain}}/getmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getmoney"
+					]
+				},
+				"description": "post请求——请求体raw非法合法传参user=2"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase020",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"参数错误\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{domain}}/getmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getmoney"
+					]
+				},
+				"description": "POST请求——无入参"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase021",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userid\":\"admin\"}"
+				},
+				"url": {
+					"raw": "http://{{domain}}/getmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getmoney"
+					]
+				},
+				"description": "POST请求——非法传参userid=admin"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase022",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=405\r",
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userid\":\"admin\"}"
+				},
+				"url": {
+					"raw": "http://{{domain}}/getmoney?userid=1",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"getmoney"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				},
+				"description": "GET请求——非法传参userid=1"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase023",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和success\r",
+							"pm.test(\"test response code and success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"    pm.expect(jsonData.success).to.eql(\"成功\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "2046",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney"
+					]
+				},
+				"description": "POST请求——Basic Auth授权账户admin密码123456，合法传参userid=1,money=2046"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase024",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code and msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"    pm.expect(jsonData.msg).to.eql(\"需要认证\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "204",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney"
+					]
+				},
+				"description": "POST请求——没有授权认证，合法传参"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase025",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code and msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"    pm.expect(jsonData.msg).to.eql(\"认证失败\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "204",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney"
+					]
+				},
+				"description": "POST请求——Basic Auth认证输入错误密码，合法传参"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase026",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code and msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "204",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney"
+					]
+				},
+				"description": "POST请求——Basic Auth认证通过，非法传参userid=2"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase027",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體\r",
+							"pm.test(\"test response body\", function () {\r",
+							"    pm.response.to.have.body(\"<html><title>500: Internal Server Error</title><body>500: Internal Server Error</body></html>\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "204.99",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney"
+					]
+				},
+				"description": "POST请求——Basic Auth授權通過，合法傳參userid=1，非法傳參money=204.99"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase028",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code=405\r",
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{domain}}/setmoney2?userid=1&money=200",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						},
+						{
+							"key": "money",
+							"value": "200"
+						}
+					]
+				},
+				"description": "GET請求——Basic Auth授權認證，傳參userid=1，money=200"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase029",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code and success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"    pm.expect(jsonData.success).to.eql(\"成功\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token=token12345",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney2"
+					]
+				},
+				"description": "POST請求——請求頭的Cookie設置為token=token123，合法傳參userid=1,money=900"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase030",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code and msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"    pm.expect(jsonData.msg).to.eql(\"cookie认证失败\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token=token12345",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney2"
+					]
+				},
+				"description": "POST請求——沒有授權認證，請求header不傳遞Cookie，請求body合法傳參"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase031",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code and msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"    pm.expect(jsonData.msg).to.eql(\"cookie非法\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token=token111111",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney2"
+					]
+				},
+				"description": "POST請求——Basic Auth授權認證，請求header傳遞非法cookie，請求body合法傳參"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase032",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和msg\r",
+							"pm.test(\"test response code and msg\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(500);\r",
+							"    pm.expect(jsonData.msg).to.eql(\"没有这个用户\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token=token12345",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney2"
+					]
+				},
+				"description": "POST請求——請求Header傳遞合法Cookie，請求Body傳遞非法參數userid=2"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase033",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體code=200\r",
+							"pm.test(\"test response code\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token=token12345",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900.99",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney2",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney2"
+					]
+				},
+				"description": "POST請求——請求header傳遞合法Cookie參數token=token12345，請求body傳遞非法參數money=900.9"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase034",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體code=405\r",
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "token=token12345",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900.99",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/setmoney2?userid=1&money=900",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"setmoney2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						},
+						{
+							"key": "money",
+							"value": "900"
+						}
+					]
+				},
+				"description": "GET請求——請求header傳遞參數Cookie設置為token=token12345,傳遞合法參數"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase035",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和success\r",
+							"pm.test(\"test response code and success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"    pm.expect(jsonData.success).to.eql(\"成功\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/97509/Desktop/新建文本文档.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/uploadfile",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"uploadfile"
+					]
+				},
+				"description": "POST請求——請求Body上傳txt格式文件"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase036",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和success\r",
+							"pm.test(\"test response code and success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"    pm.expect(jsonData.success).to.eql(\"成功\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/97509/Desktop/1.doc"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/uploadfile",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"uploadfile"
+					]
+				},
+				"description": "POST請求——請求Body上傳doc格式文件"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-teatcase037",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體的code和success\r",
+							"pm.test(\"test response code and success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(200);\r",
+							"    pm.expect(jsonData.success).to.eql(\"成功\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/97509/Desktop/1.rtf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/uploadfile",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"uploadfile"
+					]
+				},
+				"description": "POST請求——請求Body上傳rtf格式文件"
+			},
+			"response": []
+		},
+		{
+			"name": "bleach-testcase038",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//判斷響應體\r",
+							"pm.test(\"test response body\", function () {\r",
+							"    pm.response.to.have.body(\"<html><title>500: Internal Server Error</title><body>500: Internal Server Error</body></html>\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/97509/Desktop/Postman界面截图/2988de965f494f538b285819ff193442.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{domain}}/uploadfile",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"uploadfile"
+					]
+				},
+				"description": "POST請求——請求Body上傳png格式文件"
+			},
+			"response": []
+		}
+	]
+}
