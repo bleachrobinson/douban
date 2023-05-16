@@ -1,0 +1,2 @@
+# douban
+该repo包含豆瓣公共API的集合文件，你可以clone到本地，通过newman来运行，也可以clone到本地导入到Postman来运行。
